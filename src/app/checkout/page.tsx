@@ -16,6 +16,7 @@ import AddressForm from '@/Components/checkoutComponents/AddressForm';
 import ReviewForm from '@/Components/checkoutComponents/ReviewForm';
 import { server } from '@/Utils/Server';
 import { loadState, saveState } from '@/Utils/LocalstorageFn';
+import SelectOption from './SelectOption';
 
 
 
@@ -39,7 +40,9 @@ const theme = createTheme();
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [cart,setCart] = useState<any>();
+  const [value, setValue] = React.useState('delivery');
 
+  
   
   useEffect(() => {
     const products = loadState('sgh2j40-tlsit')
@@ -66,6 +69,19 @@ export default function Checkout() {
       })
     }
     
+    useEffect(() => {
+      
+      if (value === 'pickup') {
+        setInfo({...info,city:'Store Pickup',address1:'Store Pickup'})
+      }
+      else {
+        setInfo({...info,city:'',address1:''})
+
+      }
+    }, [value])
+    
+
+
     console.log('info: ', info);
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -129,13 +145,20 @@ export default function Checkout() {
           <Typography component="h1" variant="h4" align="center">
             Checkout
           </Typography>
-          <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+
+          <Stepper   activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
+            {activeStep === 0 && <Box className='flex center items-center' sx={{width:'100%',flex:1,display:'flex',minWidth:'400px'}}>
+              <Typography sx={{fontSize:'.9em'}} variant="h5" gutterBottom>
+                Choose Option:
+              </Typography>
+                <SelectOption setValue={setValue} value={value}/>
+              </Box>}
           {activeStep === steps.length ? (
             <React.Fragment>
               <Typography variant="h5" gutterBottom>
