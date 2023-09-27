@@ -22,14 +22,14 @@ import SelectOption from './SelectOption';
 
 const steps = ['Shipping address', 'Review your order'];
 
-function getStepContent(step: number,setInfo:any,handleChange:any,info:any,setActiveStep:any) {
+function getStepContent(step: number,setInfo:any,handleChange:any,info:any,setActiveStep:any,value:string) {
   switch (step) {
     case 0:
       return <AddressForm setInfo={setInfo} handleChange={handleChange} info={info} />;
     // case 1:
     //   return <PaymentForm />;
     case 1:
-      return <ReviewForm setActiveStep={setActiveStep} />;
+      return <ReviewForm value={value} setActiveStep={setActiveStep} />;
     default:
       throw new Error('Unknown step');
   }
@@ -170,7 +170,7 @@ export default function Checkout() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {getStepContent(activeStep,setInfo,handleChange,info,setActiveStep)}
+              {getStepContent(activeStep,setInfo,handleChange,info,setActiveStep,value)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} >

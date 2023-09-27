@@ -38,7 +38,7 @@ import totalCal from '@/Utils/totalCal';
 
       // return 0
 // }  
-export default function Review({setActiveStep}:{setActiveStep:any}) {
+export default function Review({setActiveStep,value}:{setActiveStep:any,value:string}) {
 
   const products = loadState('sgh2j40-tlsit')
  
@@ -77,7 +77,7 @@ export default function Review({setActiveStep}:{setActiveStep:any}) {
         <ListItem sx={{ px: 0 }}>
         <ListItemText primary="Delivery Fees" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-             3$
+             {`${value?.toLocaleLowerCase() === 'delivery' ? '3$' : '0$'}`} 
           </Typography>
           </ListItem>
           <ListItem sx={{ px: 0 }}>
@@ -88,8 +88,15 @@ export default function Review({setActiveStep}:{setActiveStep:any}) {
         </ListItem>
       </List>
       <Grid container spacing={2}>
-        <Typography variant="h6" gutterBottom color='green' sx={{fontSize:'.9em', mx: 2,my:2 }}>
-          NOTE: Delivery charge for orders that exceed 25KG will be charged extra.
+         <Typography variant="h6" gutterBottom color='green' sx={{fontSize:'.9em', mx: 2,my:2 }}>
+          
+
+          {
+            value?.toLocaleLowerCase() === 'delivery' ? 'NOTE: Delivery charge for orders that exceed 25KG will be charged extra.'
+            : 'Note: You Have Picked Store Pick Up Option'
+            
+            
+          }
           </Typography>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
