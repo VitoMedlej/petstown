@@ -1,6 +1,6 @@
 import { ICartItem } from "@/Types/Types";
 
-function totalCal(cartItems: ICartItem[]) {
+function totalCal(cartItems: ICartItem[],pickup:boolean) {
     // if (!item?._id) return;
     if (!cartItems) return 0;
     let totalPrice = 0;
@@ -10,6 +10,6 @@ function totalCal(cartItems: ICartItem[]) {
             totalPrice += item?.qty * Number(item?.price);
         }
     }
-    return Number(totalPrice) + 3 ;
+    return Number(totalPrice) + Number(pickup ? 0: 3) ;
   }
   export default totalCal

@@ -44,7 +44,7 @@ export default function Review({setActiveStep,value}:{setActiveStep:any,value:st
  
   const info = loadState('sgh2j40-b12fg')
 
-  const total = totalCal(products);
+  const total = totalCal(products,Boolean(value?.toLocaleLowerCase() === 'pickup'));
   if (!info) {
     setActiveStep(0)
   }
