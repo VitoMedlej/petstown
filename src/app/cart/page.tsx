@@ -62,7 +62,7 @@ const EmptyCartAlert = () => {
 
 const Cart = () => {
     const [cartItems,setCartItems] = useState<ICartItem[]>([])
-    const total= totalCal(cartItems) || 0; 
+    const total= totalCal(cartItems,true) || 0; 
     let localCart : ICartItem[] = loadState('sgh2j40-tlsit') || []
     useEffect(() => {
         if (localCart) {
