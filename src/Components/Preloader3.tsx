@@ -14,11 +14,11 @@ const Preloader3 = ({res}:{res:any}) => {
     const [imgs,setImgs] = useState(
         [
             {
-                img: "https://ucarecdn.com/22466a86-d184-41b1-8ac3-32c9a47d1a44/InShot_20230909_2242239471.jpg",
+                img: "https://ucarecdn.com/8b0fcb55-3d56-41fe-a227-1d99d5adc3c2/img11.jpg",
                 text: ""
             },
             {
-                img: "https://ucarecdn.com/9c88e6d7-12be-4b3c-949d-28ac9e14c7e2/InShot_20230909_2245426331.jpg",
+                img: "https://ucarecdn.com/77f1f46a-7e10-48c0-9fa8-128077b3559d/img2.jpg",
                 text: ""
             }
            
