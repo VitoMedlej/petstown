@@ -77,7 +77,7 @@ export default function Review({setActiveStep,value}:{setActiveStep:any,value:st
         <ListItem sx={{ px: 0 }}>
         <ListItemText primary="Delivery Fees" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-             {`${value?.toLocaleLowerCase() === 'delivery' ? '3$' : '0$'}`} 
+             {`${value?.toLocaleLowerCase() === 'delivery' ? '4$' : '0$'}`} 
           </Typography>
           </ListItem>
           <ListItem sx={{ px: 0 }}>
