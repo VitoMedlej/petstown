@@ -17,7 +17,7 @@ export default function SearchInput({sx,mobile}:{mobile?:boolean,sx?:any}) {
         e.preventDefault()
         console.log('q: ', value);
         if (value.length > 2) {
-            router.push(`/collection/products?limit=80&search=${value}`)
+            router.push(`/collection/products?limit=12&search=${value}`)
         }
     }
 

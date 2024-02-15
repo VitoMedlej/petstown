@@ -38,27 +38,31 @@ export async function GET(req : NextRequest, res : NextApiResponse) {
         // let page=  searchParams.get('page') || 0
     
         
-        console.log('subCategory: ', subCategory);
         let filterBySubcate = !type || !subCategory || subCategory == 'null'  ? null : `${decodeURIComponent(subCategory)}`.replace(/-/g, ' ').toLocaleLowerCase()
-        let filterByCate = !category || category === 'collection' || category === 'category' ? null : `${category}`.replace(/-/g, ' ').toLocaleLowerCase()
-        let filterByType = !type || type === null || type == 'null'  ? null : `${type}`.replace(/-/g, ' ').toLocaleLowerCase()
-        let filterBySearch = !search || search?.length < 1 ? null : `${search}`; 
         
-    const ProductsCollection = await client
+         
+        let filterByCate = !category || category === 'collection' || category === 'category' ? null : `${category}`.replace(/-/g, ' ').toLocaleLowerCase()
+        let filterByType = !type || type === null || type == 'null'  ? null : decodeURIComponent(type).toLocaleLowerCase()
+        let filterBySearch = search  && search != 'null' && search != null && search?.length > 1; 
+        console.log('subCategory: ', filterByCate);
+    
+
+
+
+
+        const ProductsCollection = await client
         .db("PETS")
         .collection("Products");
     let products : any = []
     
     
-    console.log('filterBySubcate: ', filterBySubcate);
     
     const filterQuery = () => {
       
-      if (filterBySearch !== null && filterBySearch != 'null') {
+      if (filterBySearch ) {
         return {
       $or: [
           { title: { $regex: search, $options: 'i' } },
-          { description: { $regex: search, $options: 'i' } },
           { category: { $regex: search, $options: 'i' } },
           { type: { $regex: search, $options: 'i' } },
           { subCategory: { $regex: search, $options: 'i' } },

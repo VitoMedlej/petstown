@@ -14,19 +14,18 @@ const Preloader2 = ({data,totalPages}:any) => {
     // const [pageNB,setPageNB] = useState(0)
     const router = useRouter()
     const [products,setProducts] = useState<any>()
-    useEffect(() => {
-      
-        // if (!products) {
-            setProducts(data)
-        // }
-      
-    }, [data])
+
     
     const {category} = useParams() 
     const searchParams = useSearchParams();
     const type =  searchParams.get('type')
     const subCategory   =  searchParams.get('subCategory')
 
+
+    const page = searchParams.get('page')
+    const search =  searchParams.get('search')
+    const [pageNB,setPageNB] = useState(page ? Number(page) : 1)
+ 
 
 
     // const {type} = useSearchParams();
@@ -35,17 +34,36 @@ const Preloader2 = ({data,totalPages}:any) => {
 
 
     const fetchData = async (val:number) => {
-    const url =  `/api/get-cate?category=${category ? category : 'collection'}&subCategory=${subCategory ? encodeURIComponent(subCategory) : null}&page=${Number(val - 1) || 0}&type=${type ? type : null}`  ;
-    const req = await fetch(`${server}${url}`,{cache:'no-store', next: { revalidate: 0 }})
+router.push(`/${category || 'collection'}/products?type=${type ? encodeURIComponent(type) : null}&subCategory=${subCategory ? encodeURIComponent(subCategory) : null}&page=${Number(val) }&search=${search ? search : null}`)
+
+const url =  `/api/get-cate?category=
+${category ? category : 'collection'}&search=${search ? search : 'null'}&subCategory=${subCategory ? encodeURIComponent(subCategory) : null}&page=${Number(val - 1) || 0}&type=${type ? type : null}`  ;
+
+    const req = await fetch(`${server}${url}`,
+    {cache:'no-store', next: { revalidate: 0 }})
     const res = await req.json()
+    console.log('res: ', res);
         
-            setProducts(res?.data?.products ? res?.data?.products : [])
-            totalPages = res?.data?.totalPages;
+    setProducts(res?.data?.products ? res?.data?.products : [])
+    // console.log('totalPages: ', totalPages);
+    totalPages = res?.data?.totalPages;
+    
+            // setProducts(res?.data?.products ? res?.data?.products : [])
+            // totalPages = res?.data?.totalPages;
             if (window) {
                 window.scrollTo(0,0)
             }
 
       };
+
+      useEffect(() => {
+      
+        // if (!products) {
+            setProducts(data)
+        // }
+      
+    }, [data])
+
   
     // const handlePagination = async (val:number) => {
     //     // router.replace(`${server}/${category ?category : 'collection'}/products?page=${val ? val : 0}`)
@@ -65,7 +83,7 @@ const Preloader2 = ({data,totalPages}:any) => {
         width: '100%',
         minHeight: '100px'
     }}>
-<FilterSection setProducts={setProducts}/>
+<FilterSection  setProducts={setProducts}/>
     </Box>
     <BreadCrumb></BreadCrumb>
    
@@ -89,9 +107,15 @@ No products found, try a different category...
 </Typography>}
     </Box>
     <Pagination
-        onChange={(e, val) => {
-            fetchData(val)
-    }}
+    //     onChange={(e, val) => {
+    //         fetchData(val)
+    // }}
+    page={Number(page) ? Number(page) : 1}
+    onChange={(e, val) => {
+        console.log('val: pagi', val);
+        setPageNB(val)
+        fetchData(val)
+}}
         sx={{
         my: 3
     }}
