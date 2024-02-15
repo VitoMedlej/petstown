@@ -10,6 +10,6 @@ function totalCal(cartItems: ICartItem[],pickup:boolean) {
             totalPrice += item?.qty * Number(item?.price);
         }
     }
-    return Number(totalPrice) + Number(pickup ? 0: 3) ;
+    return Number(totalPrice) + Number(pickup ? 0: 4) ;
   }
   export default totalCal
