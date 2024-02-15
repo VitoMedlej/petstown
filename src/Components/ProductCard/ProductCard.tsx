@@ -57,12 +57,12 @@ const ProductCard = ({
             sx={{
                 height: height || {xs:'180px',sm:'300px',md:'350px'}
             }}>
-                {/* <img
+                <img
                     src={images
                     ? `${images[0]}-/resize/400x400/`
                     : ''}
                     alt="Prdouct image"
-                    className="img contain"/> */}
+                    className="img contain"/>
             </Box>
             
             <Box 
