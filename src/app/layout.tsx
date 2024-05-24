@@ -11,7 +11,7 @@ export const metadata = {
     title: 'PetsTown - Shop Pet Supplies in Lebanon',
     description: `Discover a wide range of pet supplies at PetsTown, your local pet shop in Lebanon. We offer quality products for dogs, cats, birds, and more.`,
     icons: {
-        icon: `https://ucarecdn.com/f21fe250-e19c-4fd7-b4e7-bf1b246a3640/favicon.jpeg`
+        icon: `https://ucarecdn.com/c8c653a8-0d95-453b-a18e-01cc2cb26818/-/resize/400x400/`
     }
 }
 

@@ -148,7 +148,7 @@ export default function Navbar() {
 }}>
     <img
         className='img'
-        src={`https://ucarecdn.com/c301e1a4-249e-4bab-bf1c-86c25a3dc398/279234257_691043618773985_3830166968954566921_n.jpg`}
+        src={`https://ucarecdn.com/c8c653a8-0d95-453b-a18e-01cc2cb26818/-/resize/400x400/`}
         alt="Pets Town logo"/>
 </Box>
 </Link>
