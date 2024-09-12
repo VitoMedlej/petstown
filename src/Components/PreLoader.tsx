@@ -144,12 +144,12 @@ onClick={()=>router.push(`${'circut machines'.replace(/ /g, '-').toLocaleLowerCa
      {/* </Box> */}
 
       <Box/>
-        <HomeProductsCarousel Collectiontitle={"Browse Our Collections"} delay={3000} data={data?.featuredProducts?.slice(0,8)}/>
+        <HomeProductsCarousel Collectiontitle={"Featured Products"} delay={2700} data={data?.featuredProducts}/>
        
     </Container>
     <FullscreenPoster/>
-    <HomeProductsCarousel Collectiontitle={"Browse Our Collections"} delay={3000} data={data?.featuredProducts?.slice(8,16)}/>
-    <HomeProductsCarousel Collectiontitle={"Browse Our Collections"} delay={3000} data={data?.featuredProducts?.slice(16)}/>
+    <HomeProductsCarousel Collectiontitle={"Browse Our Collections"} delay={3000} data={data?.products?.slice(0,16)}/>
+    <HomeProductsCarousel Collectiontitle={"Browse Our Collections"} delay={3000} data={data?.products?.slice(16)}/>
 
     <Testimonials/>
         

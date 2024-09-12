@@ -1,56 +1,38 @@
 import client from '@/database/mongodb';
-import type {NextApiResponse}
-from 'next';
-import {NextResponse} from 'next/server'
-import {type NextRequest} from 'next/server'
+import type { NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
+import { type NextRequest } from 'next/server';
 
-export async function GET(req : NextRequest, res : NextApiResponse) {
-try {
+export async function GET(req: NextRequest, res: NextApiResponse) {
+  try {
+    const ProductsCollection = await client.db("PETS").collection("Products");
+    let featuredProducts: any = [];
+    let products: any = [];
 
-    const ProductsCollection = await client
-        .db("PETS")
-        .collection("Products");
-    let featuredProducts : any = [];
-    let products : any = []
+    const featuredProductsQuery = await ProductsCollection.find({ isFeatured: true }).limit(28);
+    const productsQuery = await ProductsCollection.find({ isFeatured: false }).sort({ _id: -1 }).limit(35);
 
-    const featuredProductsQuery = await ProductsCollection
-        // .find({isFeatured: true})
-        .find({})
-        .limit(28)
-    // const ProductsQuery = await ProductsCollection
-    //     // .find({isFeatured: false})
-    //     .find({})
-    //     .sort({_id: -1})
-    //     .limit(35)
-    
-    // await ProductsQuery.forEach((doc : any) => {
+    await featuredProductsQuery.forEach((doc: any) => {
+      featuredProducts.push(doc);
+    });
 
-    //     products.push(doc)
+    await productsQuery.forEach((doc: any) => {
+      products.push(doc);
+    });
 
-    // });
-
-    await featuredProductsQuery.forEach((doc : any) => {
-
-        featuredProducts.push(doc)
-
-    })
-
-    // if (!featuredProducts || !products || featuredProducts.length < 0 || products.length < 0) {
-        if (!featuredProducts || featuredProducts.length < 0 ) {
-        return NextResponse.json({success: false});
+    if (!featuredProducts.length || !products.length) {
+      return NextResponse.json({ success: false });
     }
 
     return NextResponse.json({
-        success: true,
-        data: {
-            // products,
-            featuredProducts
-        }
+      success: true,
+      data: {
+        products,
+        featuredProducts
+      }
     });
-}
-
-catch (error) {
+  } catch (error : any) {
     console.log('error get-data: ', error);
-
-}
+    return NextResponse.json({ success: false, error: error?.message });
+  }
 }
