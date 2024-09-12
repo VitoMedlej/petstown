@@ -15,12 +15,13 @@ export async function GET(req: NextRequest, res: NextApiResponse) {
     await featuredProductsQuery.forEach((doc: any) => {
       featuredProducts.push(doc);
     });
-
+    
+    console.log('featuredProducts: ', featuredProducts);
     await productsQuery.forEach((doc: any) => {
       products.push(doc);
     });
 
-    if (!featuredProducts.length || !products.length) {
+    if (!products ) {
       return NextResponse.json({ success: false });
     }
 
